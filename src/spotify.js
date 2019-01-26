@@ -1,17 +1,11 @@
 window.onSpotifyWebPlaybackSDKReady = () => {
-  const token = 'BQDeY03AU2kWj5LRVjcTujFQBHfhy1KmM4pbkAGUZsJSyi4ztSwSJJbd0Xl_gIY6r-R3Ws7BvSDn5ZpVZnpAYCxe-w_yfxolIrZGOJ2MTqWjwIB-sJaHaxIC-Ogl32a7qtEaiUtP_lJM2eVOjZI5Bw'
-  const device_id = '0d1841b0976bae2a3a310dd74c0f3df354899bc8'
+  const token = ''
+  const device_id = ''
   const player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
     getOAuthToken: cb => { cb(token); }
   });
 
-  // Not Ready
-  player.addListener('not_ready', ({ device_id }) => {
-    console.log('Device ID has gone offline', device_id);
-  });
-
-  // Connect to the player!
   player.connect();
 
   document.getElementById('next-form').addEventListener('submit', (e) => {
@@ -24,18 +18,47 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     playPreviousSong()
   })
 
+  document.getElementById('play-form').addEventListener('submit', (e) => {
+    e.preventDefault()
+    play()
+  })
+
+  updateNowPlaying = (response) => {
+    console.log(response)
+    document.getElementById('now-playing').innerHTML = response
+  }
+
   playNextSong = () => {
     url = "https://api.spotify.com/v1/me/player/next"
-    postData(url)
+    changeSong(url)
   }
 
   playPreviousSong = () => {
     url = "https://api.spotify.com/v1/me/player/previous"
-    postData(url)
+    changeSong(url)
   }
 
-  updateNowPlaying = (response) => {
-    document.getElementById('now-playing').innerHTML = response
+  play = () => {
+    playChillHop()
+  }
+
+  playChillHop = () => {
+    return fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id, {
+      method: "PUT",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token
+      },
+      body: {
+        "context_uri": "spotify:user:chillhopmusic:playlist:3k2cHRrJFgBkesKivMG9sF",
+        "offset": {
+          "position": 5
+        },
+        "position_ms": 0
+      }
+    })
+    .then(response => updateNowPlaying(response));
   }
 
   getNowPlaying = () => {
@@ -47,10 +70,10 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         Authorization: "Bearer " + token
       }
     })
-    .then(response => displayNowPlaying(response));
+    .then(response => updateNowPlaying(response));
   }
 
-  postData = (url = ``, data = {}) => {
+  changeSong = (url = ``, data = {}) => {
     return fetch(url, {
       method: "POST",
       headers: {

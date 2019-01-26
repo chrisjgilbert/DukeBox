@@ -11,19 +11,22 @@
   <body>
     <section id="main">
       <div class="container">
-        <div class="row">
-          <h1>DukeBox</h1>
+        <div class="row text-center">
+          <h1 class="dukebox">DukeBox</h1>
         </div>
         <div class="row">
-          <form id="prev-form">
-            <input type="submit" value="previous" class="ml-2 btn btn-light">
+          <form class="dukebox" id="prev-form">
+            <input type="submit" value="previous" class="btn btn-light">
           </form>
-          <form id="next-form">
-            <input type="submit" value="next" class="ml-2 btn btn-light">
+          <form class="dukebox" id="play-form">
+            <input type="submit" value="play" class="btn btn-light">
+          </form>
+          <form class="dukebox" id="next-form">
+            <input type="submit" value="next" class="btn btn-light">
           </form>
         </div>
         <div class="row">
-          <h1>Now playing... <span id="now-playing"></span></h1>
+          <h1 class="dukebox">Now playing... <span id="now-playing"></span></h1>
         </div>
       </div>
     </section>
