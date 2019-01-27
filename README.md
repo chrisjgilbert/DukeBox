@@ -1,5 +1,5 @@
 # DukeBox
 
-A repo i'm using to experiment with the Spotify API/SDK. So far I can control control my Spotify account from the browser - more developments in the pipeline.
+A repo i'm using to experiment with the Spotify API/SDK and learn ES6 syntax. This codebase allows me to select previous/next and start/pause my Spotify player from the browser.
 
-I have spiked this project instead of testing and it's been a challenge. A TDD'd version will appear soon.
+Note: I have spiked this project instead of testing it.
