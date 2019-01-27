@@ -1,6 +1,6 @@
 window.onSpotifyWebPlaybackSDKReady = () => {
-  const token = ''
-  const device_id = ''
+  const token = [your token]
+  const device_id = [your device_id]
   const player = new Spotify.Player({
     name: 'Web Playback SDK Quick Start Player',
     getOAuthToken: cb => { cb(token); }
